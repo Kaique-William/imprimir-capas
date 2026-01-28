@@ -15,7 +15,7 @@ app.options("*", cors());
 app.use(express.json());
 
 
-const rotas_reg = require("../routes/routes")
+const rotas_reg = require("./routes/routes")
 app.use("/registros", rotas_reg)
 
 
