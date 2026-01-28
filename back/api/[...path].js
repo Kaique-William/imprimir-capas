@@ -14,7 +14,8 @@ app.use(cors({
 
 app.use(express.json());
 
-app.use("/", rotas_reg);
+app.use("/api/registros", rotas_reg);
+
 
 let conn = null;
 
