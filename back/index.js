@@ -16,7 +16,7 @@ app.use(express.json());
 
 
 const rotas_reg = require("../routes/routes")
-app.use("/", rotas_reg)
+app.use("/registros", rotas_reg)
 
 
 mongoose.connect("mongodb+srv://teste:TESTE222@meubanco.drgd8c5.mongodb.net/?appName=MeuBanco", {
