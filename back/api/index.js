@@ -32,4 +32,4 @@ mongoose.connect(
   console.error("Erro ao conectar no banco", err);
 });
 
-module.exports = serverless(app);
+module.exports.handler = serverless(app);
