@@ -16,17 +16,7 @@ app.use(express.json());
 
 app.use("/registros", rotas_reg);
 
-const MONGO_URI = "mongodb+srv://teste:TESTE222@meubanco.drgd8c5.mongodb.net/?appName=MeuBanco";
-
-app.use(async (req, res, next) => {
-  try {
-    await connectToDatabase();
-    next();
-  } catch (err) {
-    console.error("Erro ao conectar no MongoDB:", err);
-    res.status(500).json("Erro interno do servidor (MongoDB)");
-  }
-});
+const MONGO_URI = "mongodb+srv://teste:TESTE222@meubanco.drgd8c5.mongodb.net/COMPROVANTE";
 
 let cachedConn = null;
 
@@ -38,10 +28,16 @@ async function connectToDatabase() {
     return cachedConn;
   }
 
-  cachedConn = await mongoose.connect(MONGO_URI, { dbName: "COMPROVANTE" });
-  console.log("Conectado ao MongoDB");
-  return cachedConn;
+  try {
+    cachedConn = await mongoose.connect(MONGO_URI, { dbName: "COMPROVANTE" });
+    console.log("Conectado ao MongoDB");
+    return cachedConn;
+  } catch (err) {
+    console.error("Erro ao conectar no MongoDB:", err);
+    throw err;
+  }
 }
 
+connectToDatabase().catch(err => console.error("Erro inicial MongoDB:", err));
 
 module.exports.handler = serverless(app);
