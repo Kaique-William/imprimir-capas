@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-const regModel = require("../model/regModel")
+const regModel = require(",/regModel")
 
 
 router.post("", async(req, res) => {
