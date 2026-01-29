@@ -9,6 +9,6 @@ db.version(1).stores({
 import axios from 'axios';
 
 export const api = axios.create({
-    // baseURL: `http://localhost:3000/registros`
-    baseURL: `https://imprimir-capas-back-b2kifuwiw-kwills-projects.vercel.app/registros`
+    baseURL: `http://localhost:3000/registros`
+    // baseURL: ``
 })

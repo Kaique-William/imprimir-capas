@@ -6,17 +6,11 @@ const mongoose = require("mongoose");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors({
-  origin: "*",
-  methods: ["GET", "POST", "PUT", "OPTIONS"],
-  allowedHeaders: ["Content-Type"]
-}));
-
-app.options("*", cors());
+app.use(cors())
 app.use(express.json());
 
 
-const rotas_reg = require("../routes/routes")
+const rotas_reg = require("./routes/routes")
 app.use("/registros", rotas_reg)
 
 
