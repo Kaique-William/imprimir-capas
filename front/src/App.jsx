@@ -3,9 +3,9 @@ import img from "./assets/LogoPaz.jpeg";
 import ModalSalvar from "./components/modalSalvar";
 import ModalAdicionarCapas from "./components/modalAddCapas";
 
-import { api } from "./utils/db";
+// import { api } from "./utils/db";
 
-// import { db } from "./utils/db"
+import { db } from "./utils/db"
 
 import "./App.css";
 
@@ -19,9 +19,9 @@ function App() {
 
   async function carregarLayouts() {
     try {
-      // const dados = await db.layouts.toArray();
-      const response = await api.get();
-      const dados = response.data;
+      const dados = await db.layouts.toArray();
+      // const response = await api.get();
+      // const dados = response.data;
 
       const ordenados = dados.sort((a, b) =>
         a.nome.localeCompare(b.nome, "pt-BR", { sensitivity: "base" }),

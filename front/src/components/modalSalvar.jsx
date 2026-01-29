@@ -3,7 +3,9 @@ import { useState, useEffect } from "react";
 import { Plus } from "lucide-react";
 import Swal from "sweetalert2";
 
-import { api } from "../utils/db";
+// import { api } from "../utils/db";
+import { db } from "../utils/db"
+
 import "./modalSalvar.css";
 
 export default function ModalSalvar({
@@ -44,7 +46,8 @@ export default function ModalSalvar({
 
         if (validas.length === 0) return;
 
-        await api.post("", { registros: validas });
+        // await api.post("", { registros: validas });
+        await db.layouts.bulkAdd(validas)
 
         Swal.fire({
           icon: "success",
@@ -60,9 +63,27 @@ export default function ModalSalvar({
 
         if (!codigo.trim()) return;
 
-        await api.put("", {
-          nome,
-          novoCodigo: codigo,
+        // await api.put("", {
+        //   nome,
+        //   novoCodigo: codigo,
+        // });
+
+        const registro = await db.layouts
+          .where("nome")
+          .equals(nome)
+          .first();
+
+        if (!registro) {
+          Swal.fire({
+            icon: "error",
+            title: "Não encontrado",
+            text: "Registro não encontrado no banco local",
+          });
+          return;
+        }
+
+        await db.layouts.update(registro.id, {
+          codigo,
         });
 
         Swal.fire({
