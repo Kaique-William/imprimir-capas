@@ -1,4 +1,5 @@
 const express = require("express");
+const serverless = require("serverless-http");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
@@ -32,7 +33,7 @@ mongoose.connect("mongodb+srv://teste:TESTE222@meubanco.drgd8c5.mongodb.net/?app
 });
 
 
-export default app;
+module.exports = serverless(app);
 
 // app.listen(PORT, () => {
 //     console.log(`Rodando da porta ${PORT}`);
